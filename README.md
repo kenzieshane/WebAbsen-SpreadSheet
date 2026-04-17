@@ -84,7 +84,9 @@ Sebelum memulai, pastikan Anda memiliki:
    - `email` (kolom C)
    - `pesan` (kolom D)
 
-![Struktur Sheet](https://via.placeholder.com/600x200?text=id+|+nama+|+email+|+pesan)
+| id | nama | email | pesan |
+|-------------|-------------|-------------|-------------|
+| ID-1776411037479 | Nasi Goreng | mamaia@gmail.com | halo teman teman |
 
 ### 2. Setup Google Apps Script
 
