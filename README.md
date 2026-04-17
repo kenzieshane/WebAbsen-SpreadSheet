@@ -1,13 +1,41 @@
-# WebAbsen-SpreadSheet
+# WebAbsen-SpreadSheet - Google Sheets CRUD
 Absensi menggunakan google spreadhseet api thingy idk
-
-# 📇 Kontak Manager - Google Sheets CRUD
 
 Aplikasi web sederhana untuk mengelola data kontak menggunakan Google Sheets sebagai database. Dilengkapi dengan tampilan **mobile friendly** berbasis **card view** yang nyaman digunakan di berbagai perangkat.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Mobile-lightgrey)
+
+> [!WARNING]
+> **ALPHA VERSION - SECURITY RISK**
+> 
+> This is an experimental project with **NO authentication**. Anyone with the URL can **ADD, EDIT, or DELETE** any contact.
+> 
+> **Use only for:** Personal testing with dummy data
+> 
+> **DO NOT use for:** Real production data or sensitive information
+
+> [!NOTE]
+> **Current Status:** Alpha v0.1.0
+> 
+> - ❌ No login required
+> - ❌ Anyone can delete any entry
+> - ❌ No permission system
+> - ✅ Basic CRUD works
+> - ✅ Mobile friendly
+
+> [!CAUTION]
+> **Data Loss Risk**
+> 
+> Any visitor can delete ALL your contacts with one click. Always keep a backup of your Google Sheet.
+
+> [!TIP]
+> **Safe Testing:**
+> 1. Make a COPY of your spreadsheet first
+> 2. Use fake/test data only
+> 3. Keep the URL private
+> 4. Check Google Sheets "Version History" if data gets deleted
 
 ## ✨ Fitur Utama
 
