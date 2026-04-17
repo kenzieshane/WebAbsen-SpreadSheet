@@ -8,34 +8,34 @@ Aplikasi web sederhana untuk mengelola data kontak menggunakan Google Sheets seb
 ![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Mobile-lightgrey)
 
 > [!WARNING]
-> **ALPHA VERSION - SECURITY RISK**
+> **Versi Alpha, Banyak bahayanya dan belom selesai**
 > 
-> This is an experimental project with **NO authentication**. Anyone with the URL can **ADD, EDIT, or DELETE** any contact.
+> Ini adalah proyek eksperimental dengan **TANPA autentikasi**. Siapa pun yang memiliki URL dapat **MENAMBAHKAN, MENGEDIT, atau MENGHAPUS** kontak mana pun.
 > 
-> **Use only for:** Personal testing with dummy data
+> **Gunakan hanya untuk:** Pengujian pribadi dengan data dummy
 > 
-> **DO NOT use for:** Real production data or sensitive information
+> **JANGAN gunakan untuk:** Data produksi nyata atau informasi sensitif
 
 > [!NOTE]
-> **Current Status:** Alpha v0.1.0
+> **Status Saat Ini:** Alfa v0.1.0
 > 
-> - ❌ No login required
-> - ❌ Anyone can delete any entry
-> - ❌ No permission system
-> - ✅ Basic CRUD works
-> - ✅ Mobile friendly
+> - ❌ Tidak diperlukan login
+> - ❌ Siapa pun dapat menghapus entri apa pun
+> - ❌ Tidak ada sistem izin
+> - ✅ Dasar CRUD berfungsi
+> - ✅ Ramah seluler
 
-> [!CAUTION]
-> **Data Loss Risk**
+> [!WARNING]
+> **Risiko Kehilangan Data**
 > 
-> Any visitor can delete ALL your contacts with one click. Always keep a backup of your Google Sheet.
+> Setiap pengunjung dapat menghapus SEMUA kontak Anda dengan satu klik. Selalu simpan cadangan Google Sheet Anda.
 
-> [!TIP]
-> **Safe Testing:**
-> 1. Make a COPY of your spreadsheet first
-> 2. Use fake/test data only
-> 3. Keep the URL private
-> 4. Check Google Sheets "Version History" if data gets deleted
+> [!TIPS]
+> **Pengujian Aman:**
+> 1. Buat SALINAN spreadsheet Anda terlebih dahulu
+> 2. Gunakan data palsu/uji saja
+> 3. Jaga kerahasiaan URL
+> 4. Periksa "Riwayat Versi" Google Sheets jika data terhapus
 
 ## ✨ Fitur Utama
 
