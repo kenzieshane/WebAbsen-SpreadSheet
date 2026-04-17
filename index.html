@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Kontak Manager · Card View Mobile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 12px;
+            padding-bottom: 30px;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a6eff, #0052cc);
+            color: white;
+            padding: 20px 16px;
+            border-radius: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        .spreadsheet-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            text-decoration: none;
+            margin-top: 10px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: white;
+            padding: 10px 16px;
+            border-radius: 40px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: #2c3e50;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ecc71;
+            display: inline-block;
+        }
+        .refresh-btn {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .form-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a6eff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #5b6e8c;
+            margin-bottom: 4px;
+        }
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            background: #fafbfc;
+            transition: 0.2s;
+        }
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #1a6eff;
+            outline: none;
+            background: white;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        button {
+            font-family: inherit;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+            padding: 12px 20px;
+            border-radius: 40px;
+        }
+        .btn-primary {
+            background: #1a6eff;
+            color: white;
+            flex: 1;
+            box-shadow: 0 2px 6px rgba(26,110,255,0.3);
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+            background: #0f5ad9;
+        }
+        .btn-secondary {
+            background: #eef2f9;
+            color: #4a5b7a;
+            border: 1px solid #dce3ec;
+        }
+        .btn-secondary:active {
+            transform: scale(0.97);
+        }
+
+        /* Cards Container - Mobile Friendly */
+        .contacts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s;
+            border: 1px solid #edf2f7;
+            position: relative;
+        }
+        .contact-card:active {
+            transform: scale(0.99);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .contact-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1a2c3e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .contact-name::before {
+            content: "👤";
+            font-size: 1rem;
+        }
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            padding: 8px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-btn.edit {
+            background: #fff0db;
+            color: #b45f06;
+        }
+        .icon-btn.delete {
+            background: #ffe8ec;
+            color: #c62828;
+        }
+        .icon-btn:active {
+            transform: scale(0.92);
+        }
+        .contact-email {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            word-break: break-all;
+        }
+        .contact-email::before {
+            content: "📧";
+            font-size: 0.75rem;
+        }
+        .contact-message {
+            font-size: 0.8rem;
+            color: #4a5568;
+            background: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 16px;
+            margin-top: 8px;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+        .contact-message::before {
+            content: "📝 ";
+            font-weight: 600;
+            color: #1a6eff;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #90a1b9;
+            background: white;
+            border-radius: 24px;
+        }
+
+        /* Loading & Empty State */
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: #1a6eff;
+        }
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Animasi Skeleton */
+        .skeleton-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .skeleton-name {
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            width: 60%;
+            margin-bottom: 10px;
+        }
+        .skeleton-email {
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            width: 80%;
+            margin-bottom: 8px;
+        }
+        .skeleton-message {
+            height: 40px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            width: 100%;
+        }
+
+        /* Tombol kecil */
+        .small-text {
+            font-size: 0.7rem;
+            color: #8a99b4;
+            text-align: center;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>
+            <span>📇</span> Kontak Manager
+        </h1>
+        <p>Kelola data kontak dengan mudah • Mobile Card View</p>
+        <a href="https://docs.google.com/spreadsheets/d/14wKWJWYFXeZyHAXTim1Cppx5TNTbZuIk2iDze0hnO-k/edit?usp=sharing" target="_blank" class="spreadsheet-link">
+            📊 Lihat Spreadsheet →
+        </a>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-badge">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="liveStatus">Siap</span>
+        </div>
+        <button class="refresh-btn" onclick="refreshData()" title="Refresh data">🔄</button>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-card">
+        <div class="form-title">✏️ Form Kontak</div>
+        <form id="crudForm">
+            <input type="hidden" id="rowId">
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+            </div>
+            <div class="form-group">
+                <label>Alamat Email</label>
+                <input type="email" id="email" placeholder="budi@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Catatan / Pesan</label>
+                <textarea id="pesan" placeholder="Tambahkan catatan di sini..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button type="submit" id="submitBtn" class="btn-primary">+ Tambah Kontak</button>
+                <button type="button" id="cancelBtn" class="btn-secondary hidden" onclick="resetForm()">Batal</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Daftar Kontak (Card View) -->
+    <div class="form-title" style="margin: 0 0 8px 4px;">📋 Daftar Kontak</div>
+    <div id="contactsContainer" class="contacts-container">
+        <!-- Card akan dimuat di sini -->
+        <div class="skeleton-card">
+            <div class="skeleton-name"></div>
+            <div class="skeleton-email"></div>
+            <div class="skeleton-message"></div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-name"></div>
+            <div class="skeleton-email"></div>
+            <div class="skeleton-message"></div>
+        </div>
+    </div>
+    <div class="small-text" id="counterText">—</div>
+</div>
+
+<script>
+    // ==================== KONFIGURASI ====================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqAuZFpbh7j_hQLGnkgssbNagT7G04jQsR-D3QQfufo_DwIjmlGpwApDssX2vD_vRLiQ/exec";
+    
+    // DOM Elements
+    const crudForm = document.getElementById('crudForm');
+    const contactsContainer = document.getElementById('contactsContainer');
+    const submitBtn = document.getElementById('submitBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const liveStatusSpan = document.getElementById('liveStatus');
+    const statusDot = document.getElementById('statusDot');
+    const rowIdInput = document.getElementById('rowId');
+    const namaInput = document.getElementById('nama');
+    const emailInput = document.getElementById('email');
+    const pesanInput = document.getElementById('pesan');
+    const counterText = document.getElementById('counterText');
+
+    let isLoading = false;
+
+    function setStatus(msg, isError = false) {
+        liveStatusSpan.innerText = msg;
+        statusDot.style.background = isError ? '#e74c3c' : '#2ecc71';
+        setTimeout(() => {
+            if (liveStatusSpan.innerText === msg) {
+                liveStatusSpan.innerText = "Siap";
+                statusDot.style.background = "#2ecc71";
+            }
+        }, 2500);
+    }
+
+    function showLoading(show) {
+        isLoading = show;
+        if (show) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+        } else {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+        }
+    }
+
+    // Escape HTML
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Render Cards
+    function renderCards(contacts) {
+        if (!contacts || contacts.length === 0) {
+            contactsContainer.innerHTML = `
+                <div class="empty-message">
+                    ✨ Belum ada kontak<br>
+                    <span style="font-size: 0.75rem;">Tambahkan kontak pertama melalui form di atas</span>
+                </div>
+            `;
+            counterText.innerText = "0 kontak";
+            return;
+        }
+
+        let cardsHtml = '';
+        contacts.forEach(contact => {
+            const nama = escapeHtml(contact.nama || 'Tanpa Nama');
+            const email = escapeHtml(contact.email || '-');
+            const pesan = escapeHtml(contact.pesan || 'Tidak ada catatan');
+            const id = escapeHtml(String(contact.id));
+            
+            cardsHtml += `
+                <div class="contact-card" data-id="${id}">
+                    <div class="card-header">
+                        <div class="contact-name">${nama}</div>
+                        <div class="card-actions">
+                            <button class="icon-btn edit" onclick="editContact('${id}', '${nama.replace(/'/g, "\\'")}', '${email.replace(/'/g, "\\'")}', '${pesan.replace(/'/g, "\\'")}')">
+                                ✏️
+                            </button>
+                            <button class="icon-btn delete" onclick="deleteContact('${id}')">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                    <div class="contact-email">${email}</div>
+                    <div class="contact-message">${pesan}</div>
+                </div>
+            `;
+        });
+        
+        contactsContainer.innerHTML = cardsHtml;
+        counterText.innerText = `${contacts.length} kontak`;
+    }
+
+    // Load data dari Google Sheets
+    async function loadData() {
+        if (isLoading) return;
+        showLoading(true);
+        setStatus("Memuat data...");
+        
+        // Tampilkan skeleton loading
+        contactsContainer.innerHTML = `
+            <div class="skeleton-card"><div class="skeleton-name"></div><div class="skeleton-email"></div><div class="skeleton-message"></div></div>
+            <div class="skeleton-card"><div class="skeleton-name"></div><div class="skeleton-email"></div><div class="skeleton-message"></div></div>
+        `;
+        
+        try {
+            const url = `${SCRIPT_URL}?action=read&t=${Date.now()}`;
+            const response = await fetch(url, {
+                method: 'GET',
+                cache: 'no-cache',
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            let data = await response.json();
+            console.log("Data diterima:", data);
+            
+            if (!Array.isArray(data)) throw new Error("Data bukan array");
+            
+            // Filter data valid
+            const validRows = data.filter(row => row && row.id && row.id !== "id" && row.id !== "");
+            renderCards(validRows);
+            setStatus(`✅ ${validRows.length} kontak dimuat`);
+        } catch (error) {
+            console.error('Load error:', error);
+            setStatus(`⚠️ Gagal memuat: ${error.message}`, true);
+            contactsContainer.innerHTML = `
+                <div class="empty-message" style="color:#c0392b;">
+                    ⚠️ Gagal memuat data<br>
+                    <span style="font-size:0.7rem;">Periksa koneksi atau URL Script</span>
+                </div>
+            `;
+            counterText.innerText = "Error";
+        } finally {
+            showLoading(false);
+        }
+    }
+
+    // Simpan data (Create / Update)
+    crudForm.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        const id = rowIdInput.value.trim();
+        const action = id ? 'update' : 'create';
+        
+        const payload = {
+            action: action,
+            id: id,
+            nama: namaInput.value.trim(),
+            email: emailInput.value.trim(),
+            pesan: pesanInput.value.trim()
+        };
+        
+        if (!payload.nama || !payload.email) {
+            setStatus("Nama dan Email wajib diisi!", true);
+            return;
+        }
+        
+        showLoading(true);
+        setStatus(id ? "Menyimpan perubahan..." : "Menambahkan kontak...");
+        
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            
+            setStatus(id ? "✅ Kontak diperbarui" : "✅ Kontak ditambahkan");
+            resetForm();
+            
+            setTimeout(() => {
+                loadData();
+            }, 800);
+        } catch (error) {
+            console.error('Save error:', error);
+            setStatus(`Gagal: ${error.message}`, true);
+            showLoading(false);
+        }
+    };
+
+    // Edit kontak
+    window.editContact = function(id, nama, email, pesan) {
+        rowIdInput.value = id;
+        namaInput.value = nama;
+        emailInput.value = email;
+        pesanInput.value = pesan;
+        
+        submitBtn.innerText = '💾 Simpan Perubahan';
+        cancelBtn.classList.remove('hidden');
+        document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setStatus("✏️ Mode edit: ubah data lalu simpan");
+    };
+
+    // Reset form
+    window.resetForm = function() {
+        crudForm.reset();
+        rowIdInput.value = '';
+        submitBtn.innerText = '+ Tambah Kontak';
+        cancelBtn.classList.add('hidden');
+        setStatus("Form dibersihkan");
+    };
+
+    // Hapus kontak
+    window.deleteContact = async function(id) {
+        if (!id) return;
+        if (!confirm('Hapus kontak ini? Tindakan ini permanen.')) return;
+        
+        showLoading(true);
+        setStatus("Menghapus...");
+        
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'delete', id: id })
+            });
+            
+            setStatus("🗑️ Kontak dihapus");
+            
+            setTimeout(() => {
+                loadData();
+                if (rowIdInput.value === id) resetForm();
+            }, 800);
+        } catch (error) {
+            console.error('Delete error:', error);
+            setStatus(`Gagal hapus: ${error.message}`, true);
+            showLoading(false);
+        }
+    };
+
+    // Refresh manual
+    window.refreshData = function() {
+        loadData();
+        setStatus("Memperbarui...");
+    };
+
+    // Inisialisasi
+    window.addEventListener('DOMContentLoaded', () => {
+        loadData();
+        cancelBtn.addEventListener('click', resetForm);
+    });
+</script>
+</body>
+</html>
