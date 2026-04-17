@@ -30,7 +30,7 @@ Aplikasi web sederhana untuk mengelola data kontak menggunakan Google Sheets seb
 > 
 > Setiap pengunjung dapat menghapus SEMUA kontak Anda dengan satu klik. Selalu simpan cadangan Google Sheet Anda.
 
-> [!TIPS]
+> [!INFO]
 > **Pengujian Aman:**
 > 1. Buat SALINAN spreadsheet Anda terlebih dahulu
 > 2. Gunakan data palsu/uji saja
