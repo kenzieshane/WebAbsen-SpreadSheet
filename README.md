@@ -315,8 +315,8 @@ Proyek ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE)
 ## 👨‍💻 Kontak & Dukungan
 
 - **Issues**: [GitHub Issues](https://github.com/yourusername/kontak-manager/issues)
-- **Email**: your.email@example.com
-- **Demo**: [Live Demo](https://your-demo-link.com)
+- **Email**: cortadoistheonlyone@gmail.com
+- **Demo**: [Live Demo](https://its.smkn1sliat.my.id/test2.html)
 
 ## 🙏 Acknowledgments
 
